@@ -1,20 +1,12 @@
-# Use uma imagem base do Python
+# Usando a imagem oficial do Python
 FROM python:3.9
-
-# Cria um diretório para a aplicação
+# Definindo o diretório de trabalho dentro do container
 WORKDIR /app
-
-# Copia o arquivo de requisitos e instala as dependências
+# Copiando o arquivo de dependências
 COPY requirements.txt .
-
-# Instala as dependências sem tentar atualizar o pip
+# Instalando as dependências
 RUN pip install --no-cache-dir -r requirements.txt
-
-# Copia o código da aplicação
+# Copiando o restante do código
 COPY . .
-
-# Expõe a porta 8000
-EXPOSE 8000
-
-# Comando para rodar a aplicação
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+# Adicionando um atraso de 10 segundos para garantir que o banco de dados esteja pronto
+CMD sleep 10 && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload

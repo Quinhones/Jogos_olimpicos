@@ -1,26 +1,11 @@
-from pydantic import BaseModel, validator
-from typing import Optional, List
-from app.schemas.resultado import ResultadoRead
-
+from pydantic import BaseModel
+# Atleta Schemas
 class AtletaCreate(BaseModel):
-    nome: str
-
-    @validator('nome')
-    def nome_must_not_be_empty(cls, value):
-        if not value.strip():
-            raise ValueError("O nome do atleta não pode estar vazio")
-        return value
-
-    class Config:
-        orm_mode = True
-
+   nome: str
+   class Config:
+       orm_mode = True
 class AtletaResponse(BaseModel):
-    id: int
-    nome: str
-    resultados: Optional[List['ResultadoRead']] = []
-
-    class Config:
-        orm_mode = True
-
-# Necessário para referência circular
-AtletaResponse.update_forward_refs()
+   id: int
+   nome: str
+   class Config:
+       orm_mode = True
