@@ -10,7 +10,7 @@ from app.controller.competicao_controller import finalizar_competicao
 from fastapi import Depends
 
 
-# Utilize o mock_db já definido na sua fixture
+
 @pytest.fixture
 def mock_db():
    return Mock()
@@ -25,19 +25,20 @@ def test_criar_competicao(service, mock_db):
    assert response.status == 201
                             
 def test_adicionar_resultado(service, mock_db):
-   # Simulando uma competição existente
+   # Simula uma competição existente
    competicao = Competicao(id=1, nome="100m Rasos", modalidade=ModalidadeEnum.CEM_METROS_RASOS, status=StatusCompeticaoEnum.ABERTA)
+   # Simula que o atleta ainda não participou
+   mock_db.query().filter().first.side_effect = [competicao, None]  # Primeiro para a competição, segundo para o atleta não encontrado
 
 
 def test_obter_ranking(service, mock_db):
    competicao = Competicao(id=1, nome="100m Rasos", modalidade=ModalidadeEnum.CEM_METROS_RASOS, status=StatusCompeticaoEnum.ABERTA)
    mock_db.query().filter().first.return_value = competicao
-   mock_db.query().filter_by().all.return_value = []  # Simulando sem resultados
+   mock_db.query().filter_by().all.return_value = []  
    response = service.obter_ranking(competicao_id=1)
    assert "Sem resultados cadastrados para a competição." in response.mensagem
 
-def test_finalizar_competicao(service, mock_db):
-   # Simulando a resposta do serviço
+def test_finalizar_competicao(service, mock_db):   
    mock_db.query().filter().first.return_value = Mock(id=1, nome="100m Rasos", modalidade="100M_RASOS", status="aberta")
    service.competicao_repository.salvar = Mock()
    response = service.finalizar_competicao(1)
