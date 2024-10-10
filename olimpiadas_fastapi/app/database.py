@@ -3,7 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
 from typing import Generator
 import os
-# Usar a variável de ambiente para o banco de dados
+
 DATABASE_URL = os.getenv('DATABASE_URL', 'postgresql://db_user:db_senha@db:5432/db_name')
 # Configuração da engine do SQLAlchemy
 engine = create_engine(DATABASE_URL)

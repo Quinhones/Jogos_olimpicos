@@ -9,7 +9,7 @@ from app.controller.competicao_controller import router as competicao_router
 from app.models.competicao import Competicao
 from app.models.atleta import Atleta
 from app.models.resultado import Resultado
-from app.database import Base  # Importando Base corretamente
+from app.database import Base  
 # Configuração do banco de dados
 DATABASE_URL = os.getenv('DATABASE_URL', 'postgresql://db_user:db_senha@db:5432/db_name')
 # Criando o motor do SQLAlchemy

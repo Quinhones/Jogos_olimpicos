@@ -5,9 +5,8 @@ class Resultado(Base):
    __tablename__ = 'resultados'
    id = Column(Integer, primary_key=True, index=True)
    competicao_id = Column(Integer, ForeignKey('competicoes.id'))
-   atleta_id = Column(Integer, ForeignKey('atletas.id'))  # Referência à tabela atletas
-   valor = Column(Float)
-   unidade = Column(String)
-   # Definindo a relação inversa
+   atleta_id = Column(Integer, ForeignKey('atletas.id'))
+   valor = Column(Float, nullable=False)
+   unidade = Column(String, nullable=False)
    competicao = relationship("Competicao", back_populates="resultados")
    atleta = relationship("Atleta", back_populates="resultados")

@@ -1,6 +1,8 @@
 from pydantic import BaseModel
-from typing import Any, Optional
+from typing import Optional
 class ResponseGeneric(BaseModel):
    mensagem: str
-   data: Optional[Any] = None
-   status: Optional[int] = None
+   status: int
+  
+   class Config:
+       orm_mode = True

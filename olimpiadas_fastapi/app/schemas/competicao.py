@@ -9,6 +9,6 @@ class CompeticaoResponse(BaseModel):
    id: int
    nome: str
    modalidade: ModalidadeEnum
-   status: str  # Para garantir que o status seja retornado
+   status: str  
    class Config:
        orm_mode = True

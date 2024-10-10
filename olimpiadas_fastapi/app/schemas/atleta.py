@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-# Atleta Schemas
+
 class AtletaCreate(BaseModel):
    nome: str
    class Config:

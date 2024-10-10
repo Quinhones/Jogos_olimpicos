@@ -5,5 +5,5 @@ class Atleta(Base):
    __tablename__ = 'atletas'
    id = Column(Integer, primary_key=True, index=True)
    nome = Column(String, index=True)
-   # Definindo a relação com Resultados
+   #
    resultados = relationship("Resultado", back_populates="atleta")
