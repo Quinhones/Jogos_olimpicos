@@ -15,21 +15,13 @@ class Competicao(Base):
    def adicionar_resultado(self, resultado):
        self.resultados.append(resultado)
 
-   def obter_ranking(self):
-        if self.modalidade == "LANCAMENTO_DARDO":
-            # Para lançamento de dardo, pega o melhor resultado de cada atleta
-            resultados_agrupados = {}
-            for resultado in self.resultados:
-                if resultado.atleta_id not in resultados_agrupados:
-                    resultados_agrupados[resultado.atleta_id] = resultado
-                else:
-                    if resultado.valor > resultados_agrupados[resultado.atleta_id].valor:
-                        resultados_agrupados[resultado.atleta_id] = resultado
-            ranking = sorted(resultados_agrupados.values(), key=lambda r: r.valor, reverse=True)
-        else:
-            # Para 100m, ordena pelo menor tempo
-            ranking = sorted(self.resultados, key=lambda r: r.valor)
-        return [(resultado.atleta, resultado) for resultado in ranking]
-   
-   def finalizar(self):
-       self.status = StatusCompeticaoEnum.ENCERRADA
+   def test_obter_ranking(client):
+    # Criar uma competição com o valor correto da modalidade
+    response = client.post("/competicoes", json={"nome": "100m Rasos", "modalidade": "100M_RASOS"})
+    assert response.status_code == 201  # Certifique-se de que a competição foi criada com sucesso
+    # Obter o ranking
+    response = client.get("/competicoes/1/ranking")
+    # Verificar se a resposta é 200
+    assert response.status_code == 200
+    # Verificar se a mensagem está correta
+    assert "Sem resultados cadastrados para a competição." in response.json()["mensagem"]

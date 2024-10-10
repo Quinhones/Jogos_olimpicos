@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\4057259\Desktop\script-log\estudo_api\v2-estudo\Jogos_olimpicos\venv
+set VIRTUAL_ENV=C:\Users\4057259\Desktop\script-log\estudo_api\v3\Jogos_olimpicos\venv
 
 if not defined PROMPT set PROMPT=$P$G
 
