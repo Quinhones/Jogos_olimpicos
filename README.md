@@ -60,7 +60,7 @@ Exemplo de Uso da API
 • Body:
 {
   "competicao": "100m Rasos",
-  "atleta": "Joao",
+  "atleta": "Matheus",
   "value": 10.5,
   "unidade": "s"
 }
@@ -78,7 +78,7 @@ Exemplo de Uso da API
    "mensagem": "Ranking parcial da competição '100m Rasos'",
    "ranking": [
        {
-           "atleta": "Joao",
+           "atleta": "Matheus",
            "pontuacao": 10.5,
            "unidade": "s",
            "posicao": 1
